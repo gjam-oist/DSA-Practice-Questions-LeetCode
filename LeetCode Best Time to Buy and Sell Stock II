@@ -1,0 +1,34 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        int profit = 0;
+          
+        for(int i = 1; i < prices.length; i++){
+            if(prices[i] > prices[i - 1])
+                profit += (prices[i] - prices[i-1]);
+            }
+        return  profit;
+    }
+}
+
+// 2nd Approach
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int profit = 0;
+        int buyingDate = 0;
+        int sellingDate = 0;
+        
+        for(int i = 1; i < prices.length; i++){
+            if(prices[i] >= prices[i - 1]){
+                sellingDate++;
+            }else{
+                profit += prices[sellingDate] - prices[buyingDate];
+                buyingDate = sellingDate = i;
+            }
+        }
+        
+        int newProfit =  profit + prices[sellingDate] - prices[buyingDate];
+        
+        return profit > newProfit ? profit : newProfit;
+    }
+}
